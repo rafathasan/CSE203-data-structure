@@ -105,6 +105,12 @@ public:
   }
 };
 
+bool digit(char c){
+    if(c >= '0' && c <= '9' ) return true;
+    else if(c=='.') return true;
+    else return false;
+}
+
 class Operation{
   string str,strpost;
   string newfile;
@@ -114,7 +120,7 @@ class Operation{
   int *intdigits=NULL;
   float *opperents=NULL;
 public:
-    Operation(string file,string line){
+  Operation(string file,string line){
       newfile=file;
       str=line;
       ofstream out(newfile.c_str());
@@ -123,17 +129,12 @@ public:
       createObjects(str.length());
   }
 
-    void createObjects(int capacity){
+  void createObjects(int capacity){
     charobj = new CharStack(capacity);
     flobj = new floStack(capacity);
   }
 
-    bool digit(char c){
-      if(c >= '0' && c <= '9' ) return true;
-      else return false;
-  }
-
-    int digitCount(string str){
+  int digitCount(string str){
     int c=0;
     for(int i=0;str[i]!='\0';i++){
       if(digit(str[i])){
@@ -144,7 +145,7 @@ public:
     return c;
   }
 
-    void infixToPostfix(){
+  void infixToPostfix(){
     CharStack cobj(str.length());
     ofstream out(newfile.c_str(),ios::app);
     for(int i=0,d=0;str[i]!='\0';i++){
@@ -269,16 +270,20 @@ public:
       }
     }
 
-    int charToInt(char**c,int i,int j){
-      int calc=0,power=1;
+    float charToInt(char**c,int i,int j){
+      float calc=0,power=1,decimal=1,decPower=1;
       for(int k=j;k>0;k--){
+        if(c[i][k-1]=='.')
+          decimal*=power;
+        else{
           calc+=(c[i][k-1]-48)*power;
           power*=10;
+        }
       }
-      return calc;
+      return calc/decimal;
     }
 
-    int precedence(char ch){
+  int precedence(char ch){
       switch(ch)
       {
           case '(': return 0;
@@ -294,11 +299,6 @@ public:
 
 };
 
-bool digit(char c){
-    if(c >= '0' && c <= '9' ) return true;
-    else return false;
-}
-
 bool validInfix(string line){
 int parenthesis=0,di=0,oper=0;
 if(!line.empty()){
@@ -306,7 +306,12 @@ if(!line.empty()){
     if(digit(line[i])){
       if(di!=oper)
         return 0;
-      for(int j=i;digit(line[j]);j++,i++){
+      for(int j=i,de=0;digit(line[j]);j++,i++){
+        if(line[j]=='.'){
+          de++;
+          if(de>1)
+            return 0;
+        }
       }
       di++;
       --i;
@@ -348,12 +353,12 @@ string readStringFromFile(string oldfile){
 }
 
 int main(){
-  string oldfile,newfile;
+  string oldfile="file.txt",newfile="newfile.txt";
   bool check=true;
-  cout<<"Enter File Name to run Operations: ";
-  cin>>newfile;
-  cout<<"Enter File Name that Contain Infix Expression: ";
-  cin>>oldfile;
+  cout<<"Enter a New File Name to run Operations: ";
+  //cin>>newfile;
+  cout<<"Enter Existed File Name that Contain Infix Expression: ";
+  //cin>>oldfile;
   if(validInfix(readStringFromFile(oldfile))){
     Operation obj(newfile,readStringFromFile(oldfile));
     obj.infixToPostfix();
