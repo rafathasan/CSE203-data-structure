@@ -114,7 +114,7 @@ class Operation{
   int *intdigits=NULL;
   float *opperents=NULL;
 public:
-  Operation(string file,string line){
+    Operation(string file,string line){
       newfile=file;
       str=line;
       ofstream out(newfile.c_str());
@@ -123,17 +123,17 @@ public:
       createObjects(str.length());
   }
 
-  void createObjects(int capacity){
+    void createObjects(int capacity){
     charobj = new CharStack(capacity);
     flobj = new floStack(capacity);
   }
 
-  bool digit(char c){
+    bool digit(char c){
       if(c >= '0' && c <= '9' ) return true;
       else return false;
   }
 
-  int digitCount(string str){
+    int digitCount(string str){
     int c=0;
     for(int i=0;str[i]!='\0';i++){
       if(digit(str[i])){
@@ -144,7 +144,7 @@ public:
     return c;
   }
 
-  void infixToPostfix(){
+    void infixToPostfix(){
     CharStack cobj(str.length());
     ofstream out(newfile.c_str(),ios::app);
     for(int i=0,d=0;str[i]!='\0';i++){
@@ -278,7 +278,7 @@ public:
       return calc;
     }
 
-  int precedence(char ch){
+    int precedence(char ch){
       switch(ch)
       {
           case '(': return 0;
