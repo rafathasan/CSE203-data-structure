@@ -354,7 +354,6 @@ string readStringFromFile(string oldfile){
 
 int main(){
   string oldfile="file.txt",newfile="newfile.txt";
-  bool check=true;
   cout<<"Enter a New File Name to run Operations: ";
   cin>>newfile;
   cout<<"Enter Existed File Name that Contain Infix Expression: ";
