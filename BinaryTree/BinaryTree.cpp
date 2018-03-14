@@ -1,19 +1,44 @@
-class BiTree{
+class BiTreeNode{
   int data;
   BiTree *left,*right;
 public:
-  BiTree(int in){
-    data=in;
+  BiTreeNode(int value){
+    data=value;
     left=NULL;
     right=NULL;
   }
-  BiTree*&left(){
+  int getData(){
+    return data;
+  }
+  void setLeft(BiTreeNode*tree){
+    left=tree;
+  }
+  void setRight(BiTreeNode*tree){
+    right=tree;
+  }
+  BiTreeNode*&left(){
     return left;
   }
-  BiTree*&right(){
+  BiTreeNode*&right(){
     return right;
   }
 };
-class Node{
-
+class TreeNode{
+  TreeNode node;
+  BiTreeNode *root;
+public:
+  TreeNode(TreeNode*&loRoot){
+    root=loRoot;
+    node=NULL;
+    }
+  void buildNode(){
+    cout<<"Enter Data(Integer): ";
+    int value;cin>>value;
+    if(node==NULL){
+      node = new TreeNode(value);
+    }
+    else{
+      while()
+    }
+  }
 };
