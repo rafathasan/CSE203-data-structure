@@ -1,4 +1,5 @@
 #include "iostream"
+#include "stdlib.h"
 using namespace std;
 class Student{
   int id;
@@ -70,19 +71,29 @@ public:
 
 class StudentDatabase{
   LeafNode *leafRoot;
-  LinkNode *linkRoot;
+  LinkNode *linkRoot,*linkTail;
 public:
   StudentDatabase(){
     leafRoot=NULL;
     linkRoot=NULL;
+    linkTail=NULL;
   }
 
+  int randId(){
+        return (rand()%10+11)*100000+rand()%10000+89999;
+      }
+  float randCgpa(){
+      float c=(rand()%400+1);
+      c/=100;
+      return c;
+    }
+
   void populateStudentAndSetLeafNodeLabel(LinkNode*&newLinkNode,LeafNode*&newLeafNode){
-    cout<<"ID: ";int i;cin>>i;
-    newLinkNode->getObject()->setID(i);
-    newLeafNode->setLebel(i);
-    cout<<"CGPA: ";float c;cin>>c;
-    newLinkNode->getObject()->setCgpa(c);
+    //cout<<"ID: ";int i;cin>>i;
+    newLinkNode->getObject()->setID(randId());
+    newLeafNode->setLebel(newLinkNode->getObject()->getID());
+    //cout<<"CGPA: ";float c;cin>>c;
+    newLinkNode->getObject()->setCgpa(randCgpa());
   }
 
   LeafNode*&emptyLeaf(LeafNode*&newLeafNode,int x){
@@ -92,13 +103,6 @@ public:
     emptyLeaf(newLeafNode->getLeft(),x);
   else
     emptyLeaf(newLeafNode->getRight(),x);
-  }
-
-  LinkNode*&emptyLink(LinkNode*&newLinkNode){
-    if(newLinkNode!=NULL)
-      emptyLink(newLinkNode->getNext());
-    else
-      return newLinkNode;
   }
 
   void displayLinkNode(LinkNode*loc){
@@ -123,7 +127,14 @@ public:
     tempLeaf=new LeafNode;
     tempLink=new LinkNode;
     populateStudentAndSetLeafNodeLabel(tempLink,tempLeaf);
-    emptyLink(linkRoot)=tempLink;
+      if(linkRoot==NULL){
+        linkRoot=tempLink;
+        linkTail=linkRoot;
+      }
+      else{
+        linkTail->getNext()=tempLink;
+        linkTail=tempLink;
+      }
     emptyLeaf(leafRoot,tempLink->getObject()->getID())=tempLeaf;
     tempLeaf->setObject(tempLink->getObject());
   }
@@ -179,10 +190,15 @@ int main(){
     cout<<"4: display student information having searchVal as id."<<endl;
     cin>>x;
     switch (x) {
-      case 1:iub.newEntry();break;
+      case 1:
+        int ran;cin>>ran;
+        for(int i=0;i<ran;i++)
+          iub.newEntry();
+        break;
       case 2:iub.findIdsCount();break;
       case 3:iub.findCgpaCount();break;
       case 4:iub.SearchStudent();break;
+      case 5:iub.printLinkNode();break;
     }
   }
 }
