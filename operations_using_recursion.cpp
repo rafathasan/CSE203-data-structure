@@ -94,7 +94,3 @@ double seriesSum(int n){
 	}
 	return value;
 }
- int main(){
-   string str="123456798";
-   reverseStr(str);
- }
