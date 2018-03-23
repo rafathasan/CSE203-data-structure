@@ -16,13 +16,13 @@ class ListNode{
  }
 };
 int showSearchValPosBackwardsAndReturnSumOfAllNodes(ListNode*head, int val){
-  int avg=0;
+  int sum=0;
   if(head!=NULL)
-    avg+=showSearchValPosBackwardsAndReturnSumOfAllNodes(head->getNext(),val);
+    sum+=showSearchValPosBackwardsAndReturnSumOfAllNodes(head->getNext(),val);
   cout<<head->getValue()<<" ";
   if(head->getValue()==val)
     return head->getValue();
-  return avg;
+  return sum;
 }
 int main(){
  ListNode *head=NULL, *tail=NULL;
