@@ -354,10 +354,11 @@ string readStringFromFile(string oldfile){
 
 int main(){
   string oldfile="file.txt",newfile="newfile.txt";
-  cout<<"Enter a New File Name to run Operations: ";
-  cin>>newfile;
-  cout<<"Enter Existed File Name that Contain Infix Expression: ";
-  cin>>oldfile;
+  bool check=true;
+  //cout<<"Enter a New File Name to run Operations: ";
+  //cin>>newfile;
+  //cout<<"Enter Existed File Name that Contain Infix Expression: ";
+  //cin>>oldfile;
   if(validInfix(readStringFromFile(oldfile))){
     Operation obj(newfile,readStringFromFile(oldfile));
     obj.infixToPostfix();

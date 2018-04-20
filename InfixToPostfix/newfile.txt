@@ -1,25 +1,18 @@
-Infix: 1.56*(42+23)-8.9*6.2
+Infix: 1.56/2-5+3.97
 char stack: 
-char stack: * 
-char stack: * ( 
-char stack: * ( 
-char stack: * ( + 
-char stack: * ( + 
-char stack: * 
+char stack: / 
+char stack: / 
 char stack: - 
 char stack: - 
-char stack: - * 
-char stack: - * 
-char stack: - 
+char stack: + 
+char stack: + 
 char stack: 
-Postfix: 1.56 42 23 + * 8.9 6.2 *-
+Postfix: 1.56 2 / 5 - 3.97 +
 float stack: 1.56 
-float stack: 1.56 42 
-float stack: 1.56 42 23 
-float stack: 1.56 65 
-float stack: 101.4 
-float stack: 101.4 8.9 
-float stack: 101.4 8.9 6.2 
-float stack: 101.4 55.18 
-float stack: 46.22 
-Solution: 46.22
+float stack: 1.56 2 
+float stack: 0.78 
+float stack: 0.78 5 
+float stack: -4.22 
+float stack: -4.22 3.97 
+float stack: -0.25 
+Solution: -0.25
