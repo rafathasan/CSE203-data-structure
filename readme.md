@@ -1,4 +1,4 @@
-# Data Structures CSE203, Spring 2018
+# CSE203: Data Structure, Spring 2018, IUB
 
 ### Topics:
 - Binary Tree
